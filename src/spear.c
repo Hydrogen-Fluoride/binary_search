@@ -4,6 +4,13 @@ int n;
 int k;
 int A[100000];
 
+int isOK(int len) {
+  int sum = 0;
+  for (int i = 0; i < n; i++) {
+    sum += A[i] / len;
+  }
+  return sum >= k;
+}
 
 int main(){
   int i, lb, ub;
@@ -12,6 +19,17 @@ int main(){
     scanf("%d", &A[i]);
   }
 
+  lb = 0;
+  ub = 1000000001;
+  while (ub - lb > 1) {
+    int mid = (lb + ub) / 2;
+    if (isOK(mid)) {
+      lb = mid;
+    } else {
+      ub = mid;
+    }
+  }
+  printf("%d\n", lb);
 
   return 0;
 }
